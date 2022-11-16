@@ -18,6 +18,12 @@ function App() {
       </div>
 
       <button onClick={ ()=>{
+        let titleSort = [...title];
+        titleSort.sort();
+        titleChange(titleSort);
+      }}>가나다순정렬</button>
+
+      <button onClick={ ()=>{
         let titleCopy = [...title];
         titleCopy[0] = '여자 코트 추천';
         titleChange(titleCopy);
