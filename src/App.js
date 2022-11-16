@@ -10,6 +10,10 @@ function App() {
   let [like, likeChange] = useState(0);
   let [modal, setModal] = useState(false);
 
+  function modalEvent(){
+    setModal(modal === true ? false : true)   
+  }
+
   return (
     <div className="App">
       <div className="black-nav">
@@ -35,9 +39,7 @@ function App() {
       </div>
 
       <div className='list'>
-        <h4 onClick={()=>{
-          setModal(!modal) 
-          }}>{ title[2] }</h4>
+        <h4 onClick={modalEvent}>{ title[2] }</h4>
         <p>2월 17일 발행</p>
       </div>
 
