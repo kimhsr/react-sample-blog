@@ -16,10 +16,15 @@ function App() {
       <div className="black-nav">
         <h4>블로그</h4>
       </div>
+
+      <button onClick={ ()=>{
+        let titleCopy = [...title];
+        titleCopy[0] = '여자 코트 추천';
+        titleChange(titleCopy);
+        } }>글 제목 수정</button>
+
       <div className='list'>
-        <h4><span onClick={ () => {
-          titleChange(['여자 코트 추천', '강남 라면 맛집', '리액트 독학'])
-          } }>😊</span> { title[0] } <span onClick={ ()=>{likeChange(like + 1) } }>👍</span> { like } </h4>
+        <h4> { title[0] } <span onClick={ ()=>{likeChange(like + 1) } }>👍</span> { like } </h4>
         <p>2월 17일 발행</p>
       </div>
 
@@ -27,7 +32,7 @@ function App() {
         <h4>{ title[1] }</h4>
         <p>2월 17일 발행</p>
       </div>
-      
+
       <div className='list'>
         <h4>{ title[2] }</h4>
         <p>2월 17일 발행</p>
