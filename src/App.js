@@ -10,6 +10,7 @@ function App() {
   let [like, likeChange] = useState([0, 0, 0]);
   let [modal, setModal] = useState(false);
   let [titleState, setTitleState] = useState(0);
+  let [inputValue, setInputValue] = useState('');
 
   function titleEvent() {
     let titleCopy = [...title];
@@ -27,19 +28,31 @@ function App() {
         title.map(function (a, i) {
           return (
             <div className='list' key={i}>
-              <h4 onClick={() => { setModal(true); setTitleState(i) }}>{title[i]} <span onClick={() => {
-                let likeCopy = [...like];
-                likeCopy[i] = likeCopy[i] + 1;
-                likeChange(likeCopy);
-              }}>👍</span> {like[i]}</h4>
+              <h4 onClick={() => { setModal(!modal); setTitleState(i) }}>{title[i]}
+                <span onClick={(e) => {
+                  // 상위 html로 퍼지는 이벤트버블링 막을때 사용
+                  e.stopPropagation();
+                  let likeCopy = [...like];
+                  likeCopy[i] = likeCopy[i] + 1;
+                  likeChange(likeCopy);
+                }}> 👍</span> {like[i]}</h4>
               <p>2월 17일 발행</p>
             </div>
           )
         })
       }
 
+      <input onChange={(e) => {
+        setInputValue(e.target.value);
+        console.log(inputValue)
+      }} />
+
+      <button>전송</button>
+
       {
-        modal === true ? <Modal title={title} titleEvent={titleEvent} titleState={titleState} /> : null
+        modal === true
+          ? <Modal title={title} titleEvent={titleEvent} titleState={titleState} />
+          : null
       }
 
     </div>
