@@ -6,8 +6,8 @@ import { useState } from 'react';
 
 function App() {
 
-  let [title, titleChange] = useState(['남자 코트 추천', '강남 라면 맛집', '리액트 독학']);
-  let [like, likeChange] = useState([0, 0, 0]);
+  let [title, setTitle] = useState(['남자 코트 추천', '강남 라면 맛집', '리액트 독학']);
+  let [like, setLike] = useState([0, 0, 0]);
   let [modal, setModal] = useState(false);
   let [titleState, setTitleState] = useState(0);
   let [inputValue, setInputValue] = useState('');
@@ -15,7 +15,7 @@ function App() {
   function titleEvent() {
     let titleCopy = [...title];
     titleCopy[0] = '여자 코트 추천';
-    titleChange(titleCopy);
+    setTitle(titleCopy);
   }
 
   return (
@@ -34,9 +34,14 @@ function App() {
                   e.stopPropagation();
                   let likeCopy = [...like];
                   likeCopy[i] = likeCopy[i] + 1;
-                  likeChange(likeCopy);
+                  setLike(likeCopy);
                 }}> 👍</span> {like[i]}</h4>
               <p>2월 17일 발행</p>
+              <button onClick={() => {
+                let titleCopy = [...title];
+                titleCopy.splice(i, 1);
+                setTitle(titleCopy);
+              }}>삭제</button>
             </div>
           )
         })
@@ -44,10 +49,13 @@ function App() {
 
       <input onChange={(e) => {
         setInputValue(e.target.value);
-        console.log(inputValue)
       }} />
 
-      <button>전송</button>
+      <button onClick={(e) => {
+        let titleCopy = [...title];
+        titleCopy.unshift(inputValue);
+        setTitle(titleCopy);
+      }}>글 발행</button>
 
       {
         modal === true
